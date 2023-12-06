@@ -6,7 +6,7 @@ def format_cep(cep):
     return f"{cep[:5]}-{cep[5:]}"
 
 def search_endereco_by_cep(cep):
-    url = f'https://viacep.com.br/ws/%7Bcep%7D/json/'
+    url = f'https://viacep.com.br/ws/{cep}/json/'
     response = requests.get(url)
 
     if response.status_code == 200 and response.text.strip():
@@ -14,7 +14,7 @@ def search_endereco_by_cep(cep):
             data = response.json()
             if 'erro' not in data:
                 formatted_cep = format_cep(data.get('cep', ''))
-                endereco = endereco(
+                endereco = Endereco(
                     id=1,
                     endereco=data.get('logradouro', ''),
                     bairro=data.get('bairro', ''),
