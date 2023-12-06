@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Endereço</title>
+</head>
+<body>
+    <h1>Consulta de Endereço</h1>
+    
+    <form method="post">
+        <label for="search_query">Digite o CEP ou Nome do Logradouro:</label>
+        <input type="text" name="search_query" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if data %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
+                    <th>CEP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.endereco }}</td>
+                        <td>{{ item.bairro }}</td>
+                        <td>{{ item.cidade }}</td>
+                        <td>{{ item.uf }}</td>
+                        <td>{{ item.cep }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
